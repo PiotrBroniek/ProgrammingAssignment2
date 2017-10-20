@@ -1,4 +1,9 @@
-## This function creates a special "matrix" object that can cache its inverse
+## This function takes matrix and creates functions : "set", "get", "setinverse", 
+## "getinverse" which are then passed as a list. Function "set" makes variable m
+## that is used to cache inverse to NULL in global environment and changes variable x
+## to y whenever new variable is input. Function "get" returns matrix x without changes.
+## Function "setinverse" makes calculation of inverse matrix. Function "getinverse" 
+## returns inverted matrix that was cached. 
 
 makeCacheMatrix <- function(x = matrix()) {
               
@@ -15,11 +20,12 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## This function computes the inverse of the special 
-## "matrix" returned by makeCacheMatrix above. 
-##If the inverse has already been calculated 
-## and the matrix has not changed), then the 
-##cachesolve should retrieve the inverse from the cache.
+## This function computes the inverse of the inversable "matrix" 
+## by using inputs from makeCacheMatrix above. Firstly function tries to use 
+## "getinverse" function from cache. If cache is not NULL it sends message 
+##"getting data" and returns inverted matrix under variable m from cache. If m is 
+## empty it gets matrix with "get" and inverts it by function "solve". In last two 
+## lines it stores result in cache by "setinverse" and returns inverted matrix to user
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
